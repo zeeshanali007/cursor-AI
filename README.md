@@ -1,56 +1,27 @@
-# {{crew_name}} Crew
+# Poem Flow (CrewAI)
 
-Welcome to the {{crew_name}} Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+Small CrewAI Flow that generates a light-hearted poem about how awesome CrewAI
+is. The flow delegates the creative work to the `PoemCrew`, which is configured
+with YAML for easy tweaks.
 
-## Installation
+## Setup
+- Python `>=3.10,<3.14`
+- Install [uv](https://docs.astral.sh/uv/): `pip install uv`
+- Install deps: `uv install`
+- Set `OPENAI_API_KEY` in your environment before running
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+## Run
+- Generate a poem (random 1-5 sentences): `uv run kickoff`
+- Choose a sentence count: `uv run python -m hello_flow.main --sentences 3`
+- Visualize the flow (Mermaid diagram): `uv run plot` or `uv run python -m hello_flow.main --plot`
 
-First, if you haven't already, install uv:
+## Customize
+- Agents: `src/hello_flow/crews/poem_crew/config/agents.yaml`
+- Tasks: `src/hello_flow/crews/poem_crew/config/tasks.yaml`
+- Flow logic: `src/hello_flow/main.py`
+- Tools template: `src/hello_flow/tools/custom_tool.py`
 
-```bash
-pip install uv
-```
-
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/hello_flow/config/agents.yaml` to define your agents
-- Modify `src/hello_flow/config/tasks.yaml` to define your tasks
-- Modify `src/hello_flow/crew.py` to add your own logic, tools and specific args
-- Modify `src/hello_flow/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your flow and begin execution, run this from the root folder of your project:
-
-```bash
-crewai run
-```
-
-This command initializes the hello_flow Flow as defined in your configuration.
-
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
-
-## Understanding Your Crew
-
-The hello_flow Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
-
-## Support
-
-For support, questions, or feedback regarding the {{crew_name}} Crew or crewAI.
-
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
-
-Let's create wonders together with the power and simplicity of crewAI.
+## Notes
+- Console scripts are defined in `pyproject.toml` (`kickoff`, `run_crew`, `plot`).
+- The flow returns the poem, sentence count, and author metadata; you can extend
+  `save_poem` to persist the output wherever you like.
